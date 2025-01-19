@@ -3,7 +3,6 @@ package controller
 import (
 	"encoding/json"
 	"fmt"
-	"log"
 	"net/http"
 )
 
@@ -16,7 +15,6 @@ type Person struct {
 }
 
 func SetUpController() {
-	log.Println("SET UP CONTROLLER")
 	http.HandleFunc("/echo", handleEcho)
 }
 
