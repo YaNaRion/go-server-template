@@ -30,9 +30,9 @@ Run in docker with hot reload
 ## INSTALL
 $ sudo snap install docker
 
-## Build docker
+## Build docker image
 $ sudo docker buildx build -t go-server .
 
-## Run docker
+## Run server in docker
 $ sudo docker run -p 3000:3000 --rm -v $(pwd):/app -v /app/tmp --name go-server-air go-server
 
