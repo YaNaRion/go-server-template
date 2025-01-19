@@ -1,11 +1,14 @@
 Installer GO
 $ sudo snap install go
+$ sudo pacman -S install
+$ sudo apt install golang
+
 
 Vérifier que la bonne version de Go est installer
 $ go version
 Version de Go utilié pour le projet: 1.23.4
 
-$ sudo pacman -S go
+## HOST-LOCAL
 
 Installer les dependances
 $go mod tidy
@@ -23,10 +26,13 @@ $./main
 
 
 
+## DOCKER
 
+run in docker with hot reload
 
-Docker
+#Build docker
+$sudo docker buildx buld -t go-server .
 
-
-sudo docker run -p 3000:3000 --rm -v $(pwd):/app -v /app/tmp --name my-go-server-air my-go-server
+#Run docker
+$sudo docker run -p 3000:3000 --rm -v $(pwd):/app -v /app/tmp --name go-server-air go-server
 
