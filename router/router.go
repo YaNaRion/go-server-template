@@ -23,9 +23,8 @@ func routerHome(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		if err == errorHTMLNotFound {
 			log.Printf("%s HTML FILE NOT FOUND\n", home)
-		} else {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
 		}
+		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 
 	err = t.Execute(w, nil)

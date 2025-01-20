@@ -10,7 +10,6 @@ import (
 const port = ":3000"
 
 func main() {
-
 	log.Println("Setting Router")
 	router.SetupRouter()
 
@@ -22,5 +21,4 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-
 }

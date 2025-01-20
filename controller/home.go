@@ -16,12 +16,12 @@ type Person struct {
 }
 
 func SetUpController() {
-	http.HandleFunc("/data", handleEcho)
+	http.HandleFunc("/data", handleData)
 }
 
-func handleEcho(w http.ResponseWriter, r *http.Request) {
+func handleData(w http.ResponseWriter, r *http.Request) {
 
-	log.Println(fmt.Sprintf("ECHO REQUEST FROM: %s", r.RemoteAddr))
+	log.Println(fmt.Sprintf("DATA REQUEST FROM: %s", r.RemoteAddr))
 
 	p := buildPerson()
 
@@ -32,7 +32,6 @@ func handleEcho(w http.ResponseWriter, r *http.Request) {
 	}
 
 	writeResponse(w, jsonData)
-
 }
 
 func buildPerson() Person {

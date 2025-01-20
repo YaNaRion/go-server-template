@@ -23,16 +23,28 @@ $ go build main.go
 $./main
 
 
-
 # DOCKER
 Run in docker with hot reload
 
 ## INSTALL
 $ sudo snap install docker
 
+
+## Add sur user to docker group permission
+$ sudo usermod -aG docker $USER
+
+Reload group membership
+$ newgrp docker
+
 ## Build Docker image
-$ sudo docker buildx build -t go-server .
+$ docker buildx build -t go-server .
 
 ## Run server in Docker
-$ sudo docker run -p 3000:3000 --rm -v $(pwd):/app -v /app/tmp --name go-server-air go-server
+$ docker run -p 3000:3000 --rm -v $(pwd):/app -v /app/tmp --name go-server-air go-server
 
+
+# Postgress
+Pour creer l'image
+docker run --name server-db -e POSTGRES_PASSWORD=123 -p 5431:5432 -d postgres
+
+docker start $DOCKER ID
