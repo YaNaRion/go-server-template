@@ -3,6 +3,7 @@ package controller
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 )
 
@@ -15,23 +16,34 @@ type Person struct {
 }
 
 func SetUpController() {
-	http.HandleFunc("/echo", handleEcho)
+	http.HandleFunc("/data", handleEcho)
 }
 
 func handleEcho(w http.ResponseWriter, r *http.Request) {
 
-	fmt.Println("Hello from handlerECHO")
-	fmt.Println(r.Body)
+	log.Println(fmt.Sprintf("ECHO REQUEST FROM: %s", r.RemoteAddr))
 
-	p := Person{
+	p := buildPerson()
+
+	jsonData, err := json.Marshal(p)
+
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+	}
+
+	writeResponse(w, jsonData)
+
+}
+
+func buildPerson() Person {
+	return Person{
 		Name:  "John Doe",
 		Age:   30,
 		Email: "john.doe@example.com",
 	}
+}
 
-	jsonData, _ := json.Marshal(p)
-
+func writeResponse(w http.ResponseWriter, data []byte) {
 	w.Header().Set("Contend-Type", ContentTypeJSON)
-
-	w.Write(jsonData)
+	w.Write(data)
 }

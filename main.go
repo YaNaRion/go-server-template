@@ -11,8 +11,6 @@ const port = ":3000"
 
 func main() {
 
-	log.Println("test")
-
 	log.Println("Setting Router")
 	router.SetupRouter()
 
