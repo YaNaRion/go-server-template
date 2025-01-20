@@ -8,7 +8,7 @@ import (
 	"net/http"
 )
 
-var errorHTMLnotFound = errors.New("HTML FILE NOT FOUND")
+var errorHTMLNotFound = errors.New("HTML FILE NOT FOUND")
 
 const home = "home.html"
 
@@ -21,21 +21,25 @@ func SetupRouter() {
 func routerHome(w http.ResponseWriter, r *http.Request) {
 	t, err := renderTemplate(home)
 	if err != nil {
-		if err == errorHTMLnotFound {
-			log.Println(fmt.Sprintf("%s HTML FILE NOT FOUND", home))
+		if err == errorHTMLNotFound {
+			log.Printf("%s HTML FILE NOT FOUND\n", home)
 		} else {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 		}
 	}
 
-	t.Execute(w, nil)
+	err = t.Execute(w, nil)
+	if err != nil {
+		log.Printf("An error occure while sending HTML file: %s \n", err)
+
+	}
 }
 
 func renderTemplate(tmpl string) (*template.Template, error) {
 	t, err := template.ParseFiles(fmt.Sprintf("./router/templates/%s", tmpl))
 
 	if t == nil {
-		return nil, errorHTMLnotFound
+		return nil, errorHTMLNotFound
 	}
 
 	if err != nil {
