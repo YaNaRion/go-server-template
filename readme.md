@@ -48,3 +48,19 @@ Pour creer l'image
 docker run --name server-db -e POSTGRES_PASSWORD=123 -p 5431:5432 -d postgres
 
 docker start $DOCKER ID
+
+
+
+
+# Architecture
+Router
+    - Handle routing for frontend
+
+Controller
+    - REST API
+
+Domain
+    - Object creation and modfication
+
+Infrastructure
+    - Communication layer with DB
